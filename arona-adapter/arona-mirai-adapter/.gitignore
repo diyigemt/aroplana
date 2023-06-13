@@ -1,0 +1,28 @@
+# Project exclude paths
+/.gradle/
+/gradle/wrapper/gradle-wrapper.jar
+/build/
+/.idea/
+/test/
+/out/
+/run/
+/bin/
+/config/
+/plugins/
+/debug-sandbox/*
+deploy.cmd
+
+# Runtime files
+/bots/
+/data/
+/logs/
+/debug/
+/plugin-libraries/
+/plugin-shared-libraries/
+/tools/img/
+/tools/image/
+/tools/__pycache__/
+tools/pixiv.db
+tools/pixiv.py
+tools/pixiv.db-journal
+tools/skip

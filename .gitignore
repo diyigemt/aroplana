@@ -1,0 +1,16 @@
+# Runtime files
+/bots/
+/data/
+/logs/
+/plugin-libraries/
+/plugin-shared-libraries/
+/tools/img/
+/tools/image/
+/tools/raw/
+/tools/__pycache__/
+tools/pixiv.db
+tools/pixiv.py
+tools/pixiv.db-journal
+tools/skip
+tools/tmp.png
+tools/tmp2.png
