@@ -77,12 +77,14 @@ function toFile(name: string) {
     </ElTabPane>
   </ElTabs>
   <ElDivider />
-  <ElForm inline>
+  <ElForm inline @submit.native.prevent>
     <ElFormItem class="small-item">
       <ElInput
         v-model="searchTarget"
         clearable
-        placeholder="别名等搜索"
+        placeholder="学生/活动/历来总力等搜索"
+        maxlength="10"
+        @keydown.enter="doSearch()"
       />
     </ElFormItem>
     <ElFormItem class="small-item">
@@ -95,6 +97,7 @@ function toFile(name: string) {
     <ElCard
       v-for="(e, index) in tutorialSearchResultList"
       :key="index"
+      class="cursor-pointer search-result-item"
       @click="toFile(e.name)"
     >
       {{ e.name }}
@@ -105,5 +108,11 @@ function toFile(name: string) {
 <style scoped>
 .small-item {
   margin-right: 16px;
+}
+.search-result-item {
+  transition: box-shadow 0.25s;
+}
+.search-result-item:hover {
+  box-shadow: var(--el-box-shadow-dark);
 }
 </style>
