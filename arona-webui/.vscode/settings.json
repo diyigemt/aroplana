@@ -25,5 +25,6 @@
   "prettier.enable": false,
   "prettier.printWidth": 200,
   "prettier.semi": true,
-  "prettier.singleQuote": false
+  "prettier.singleQuote": false,
+  "vue-i18n-manage.localePath": "d:\\code\\aroplana\\arona-webui\\src\\locales"
 }

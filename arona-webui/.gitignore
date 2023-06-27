@@ -2,6 +2,7 @@
 # Project Specific
 ######################
 dist
+dist.7z
 dist-ssr
 *.local
 

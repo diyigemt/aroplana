@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ThemeChange from "./components/ThemeChange/index.vue";
 import LocalesChange from "./components/LocalesChange/index.vue";
+import About from "./components/About/index.vue";
 import UnoCSSIconButton from "~/components/Icon/UnoCSSIconButton.vue";
 
 defineOptions({
@@ -22,14 +22,21 @@ defineOptions({
         >
           <div
             class="inline-flex text-lg text-primary transition-all duration-200 md:text-3xl"
+            style="background: linear-gradient( 135deg, rgb(72,84,235), rgba(203,158,234, .8) 90% );
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+            "
           >
-            <span class="text-accent">V<span class="lowercase">ite</span></span>
-            <span class="text-base-content">B<span class="lowercase">oot</span></span>
+            <!-- <span class="text-accent">A<span class="lowercase">rona</span></span>
+            <span class="text-base-content">B<span class="lowercase">ot</span></span> -->
+            <span>A<span class="lowercase">rona</span>B<span class="lowercase">ot</span></span>
           </div>
         </RouterLink>
       </div>
       <div>
-        <ThemeChange />
+        <!-- <ThemeChange /> -->
+        <About />
         <LocalesChange />
         <span
           class="tooltip tooltip-bottom before:text-xs before:content-[attr(data-tip)]"
@@ -39,7 +46,7 @@ defineOptions({
             <a
               aria-label="Github"
               target="_blank"
-              href="https://github.com/kirklin/vite-boot"
+              href="https://github.com/diyigemt/arona"
               class="btn-ghost drawer-button btn-square btn normal-case"
             >
               <UnoCSSIconButton icon="i-mdi-github" />

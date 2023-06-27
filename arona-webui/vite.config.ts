@@ -84,8 +84,8 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico"],
       manifest: {
-        name: "ViteBoot",
-        short_name: "ViteBoot",
+        name: "AronaBot",
+        short_name: "AronaBot",
         theme_color: "#ffffff",
         icons: [
           {

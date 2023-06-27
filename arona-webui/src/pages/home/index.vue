@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Hero from "./components/Hero.vue";
-import StoreTest from "./components/StoreTest.vue";
+import Tutorial from "~/pages/home/components/Tutorial.vue";
 
 defineOptions({
   name: "Home",
@@ -8,8 +7,9 @@ defineOptions({
 </script>
 
 <template>
-  <Hero />
-  <StoreTest />
+  <div class="p-4 pt-0">
+    <Tutorial />
+  </div>
 </template>
 
 <style scoped></style>

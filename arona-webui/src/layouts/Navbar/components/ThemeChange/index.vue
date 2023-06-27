@@ -48,7 +48,7 @@ const changeTheme = (event: MouseEvent, theme: CustomTheme) => {
     Math.max(x, innerWidth - x),
     Math.max(y, innerHeight - y),
   );
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
   // @ts-expect-error
   const transition = document.startViewTransition();
   transition.ready.then(() => {

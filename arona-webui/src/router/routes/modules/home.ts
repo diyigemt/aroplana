@@ -1,4 +1,6 @@
-const home = [{
+import type { RouteRecordRaw } from "vue-router";
+
+const home: RouteRecordRaw[] = [{
   path: "/home",
   name: "Home",
   component: () => import("~/pages/home/index.vue"),
@@ -7,14 +9,9 @@ const home = [{
   },
 },
 {
-  path: "/hero",
-  name: "Hero",
-  component: () => import("~/pages/home/components/Hero.vue"),
-},
-{
-  path: "/StoreTest",
-  name: "StoreTest",
-  component: () => import("~/pages/home/components/StoreTest.vue"),
+  path: "/tutorial",
+  name: "Tutorial",
+  component: () => import("~/pages/home/components/Tutorial.vue"),
 },
 ];
 
