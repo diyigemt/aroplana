@@ -20,7 +20,7 @@ const searchTarget = ref("");
 const settingStore = useSetting();
 const showInlineImage = ref(false);
 const inlineImageUrl = ref("");
-const { loading, startLoading, endLoading } = useLoading();
+const { loading, startLoading, endLoading } = useLoading(600);
 const doSearch = useThrottleFn(() => {
   const name = searchTarget.value;
   if (!name) {
@@ -33,8 +33,12 @@ const doSearch = useThrottleFn(() => {
   });
   startLoading();
   TutorialApi.fetchTutorialSearch(searchTarget.value).then((res) => {
-    tutorialSearchResultList.value = res.data;
     endLoading();
+    if (res && res.data && Array.isArray(res.data) && res.data.length !== 0) {
+      showImage(res.data[0]);
+    } else {
+      tutorialSearchResultList.value = res.data;
+    }
   }).catch(endLoading);
 }, 1000);
 function toFile(name: string) {
@@ -42,20 +46,23 @@ function toFile(name: string) {
   TutorialApi.fetchTutorialSearch(name).then((res) => {
     endLoading();
     if (res && res.data && Array.isArray(res.data) && res.data.length !== 0) {
-      const path = `https://arona.cdn.diyigemt.com/image${res.data[0].path}`;
-      if (settingStore.imageInlineMode) {
-        const win = window.open(`https://arona.cdn.diyigemt.com/image${path}`);
-        if (win === null) {
-          ElMessageBox.alert("窗口打开失败, 请允许弹出新窗口或在右上角设置中改变图片打开方式", "提示");
-        }
-      } else {
-        inlineImageUrl.value = path;
-        showInlineImage.value = true;
-      }
+      showImage(res.data[0]);
     } else {
       errorMessage("获取path失败");
     }
   }).catch(endLoading);
+}
+function showImage(data: TutorialSearchResult) {
+  const path = `https://arona.cdn.diyigemt.com/image${data.path}`;
+  if (settingStore.imageInlineMode) {
+    const win = window.open(`https://arona.cdn.diyigemt.com/image${path}`);
+    if (win === null) {
+      ElMessageBox.alert("窗口打开失败, 请允许弹出新窗口或在右上角设置中改变图片打开方式", "提示");
+    }
+  } else {
+    inlineImageUrl.value = path;
+    showInlineImage.value = true;
+  }
 }
 </script>
 
