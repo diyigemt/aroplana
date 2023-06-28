@@ -9,6 +9,7 @@ import Inspect from "vite-plugin-inspect";
 import { VitePWA } from "vite-plugin-pwa";
 import VueDevTools from "vite-plugin-vue-devtools";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import { compression } from "vite-plugin-compression2";
 
 // vite.config.ts
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
@@ -140,6 +141,7 @@ export default defineConfig({
         configFile: resolve(__dirname, "src/config/unocss/index.ts"),
       },
     ),
+    compression(),
   ],
   resolve: {
     alias: {
