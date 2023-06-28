@@ -81,7 +81,9 @@ export default defineConfig({
 
     // https://github.com/antfu/vite-plugin-pwa
     VitePWA({
-      registerType: "autoUpdate",
+      injectRegister: "auto",
+      includeManifestIcons: true,
+      registerType: "prompt",
       includeAssets: ["favicon.ico"],
       manifest: {
         name: "AronaBot",
@@ -103,6 +105,22 @@ export default defineConfig({
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
+          },
+        ],
+      },
+      workbox: {
+        ignoreURLParametersMatching: [/^https:\/\/arona.cdn.diyigemt.com\/image\//],
+        runtimeCaching: [
+          {
+            urlPattern: /(.*?)\.(js|css|json)$/i,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "asset-cache",
+            },
+          },
+          {
+            urlPattern: /^https:\/\/arona.cdn.diyigemt.com\/image\//,
+            handler: "NetworkOnly",
           },
         ],
       },

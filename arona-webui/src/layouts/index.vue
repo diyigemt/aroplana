@@ -9,7 +9,7 @@ defineOptions({
 
 <template>
   <div class="font-chinese antialiased">
-    <div class="min-h-screen">
+    <div class="h100%">
       <Navbar />
       <RouterView />
     </div>

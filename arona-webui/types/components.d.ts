@@ -14,4 +14,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     UnoCSSIconButton: typeof import('./../src/components/Icon/UnoCSSIconButton.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

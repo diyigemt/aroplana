@@ -5,6 +5,8 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createI18n } from "vue-i18n";
 
+import { registerSW } from "virtual:pwa-register";
+import { ElMessageBox } from "element-plus";
 import { router } from "./router";
 
 import { registerStore } from "./store";
@@ -16,6 +18,20 @@ import "~/styles/main.css";
 import "uno.css";
 
 import "element-plus/dist/index.css";
+import { warningMessage } from "~/utils/message";
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    ElMessageBox.alert("资源已更新, 请点击刷新已使用最新版本", "提示", {
+      type: "info",
+      confirmButtonText: "刷新",
+    }).then(() => {
+      updateSW(true).then();
+    }).catch(() => {
+      warningMessage("取消更新");
+    });
+  },
+});
 
 const app = createApp(App);
 const messages = Object.fromEntries(

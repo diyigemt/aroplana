@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ElButton, ElDialog } from "element-plus";
-import { errorMessage } from "~/utils/message";
+import { errorMessage, successMessage } from "~/utils/message";
 import { isMobile } from "~/utils";
 
 defineOptions({
@@ -8,8 +8,20 @@ defineOptions({
 });
 const show = useLocalStorage("show-info", true);
 const width = isMobile() ? "90vw" : "300";
+let unknownCount = 0;
+const unknownCountMap: { [key: number]: string } = {
+  10: "真的不明白吗",
+  15: "好好好",
+  20: "那就不明白吧, 我又没什么办法",
+};
 function onReject() {
-  errorMessage("不明白也得给我明白");
+  unknownCount++;
+  if (unknownCount === 50) {
+    successMessage("恭喜, 你已经点了50下, 你赢了");
+    show.value = false;
+  } else {
+    errorMessage(unknownCountMap[unknownCount] || "不明白也得给我明白");
+  }
 }
 </script>
 

@@ -7,3 +7,25 @@ export function isMobile() {
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
 }
+
+export function useLoading(timeout = 1000, init = false) {
+  const loading = ref(init);
+  let start = 0;
+  return {
+    loading,
+    startLoading() {
+      start = Date.now();
+      loading.value = true;
+    },
+    endLoading() {
+      const diff = Date.now() - start;
+      if (diff > timeout) {
+        loading.value = false;
+      } else {
+        setTimeout(() => {
+          loading.value = false;
+        }, timeout - diff);
+      }
+    },
+  };
+}
