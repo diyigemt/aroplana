@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ElCard, ElDivider, ElForm, ElFormItem, ElInput, ElScrollbar, ElSpace, ElTabPane, ElTabs } from "element-plus";
+import { ElCard, ElDivider, ElForm, ElFormItem, ElImage, ElInput, ElMessageBox, ElScrollbar, ElSpace, ElTabPane, ElTabs } from "element-plus";
 import { TutorialUtil } from "~/utils/tutorial";
 import { TutorialApi } from "~/api/modules/tutorial";
 import type { TutorialSearchResult } from "~/interface/modules/tutorial";
 import { errorMessage, warningMessage } from "~/utils/message";
-import { isMobile, useLoading } from "~/utils";
+import { useLoading } from "~/utils";
 
 defineOptions({
   name: "AronaTutorial",
@@ -17,7 +17,9 @@ const server = ref("server-jp");
 const type = ref("quick");
 const tutorialSearchResultList = ref<TutorialSearchResult[]>([]);
 const searchTarget = ref("");
-const removeSpace = isMobile();
+const settingStore = useSetting();
+const showInlineImage = ref(false);
+const inlineImageUrl = ref("");
 const { loading, startLoading, endLoading } = useLoading();
 const doSearch = useThrottleFn(() => {
   const name = searchTarget.value;
@@ -25,6 +27,10 @@ const doSearch = useThrottleFn(() => {
     warningMessage("请先输入名称");
     return;
   }
+  showInlineImage.value = false;
+  nextTick(() => {
+    inlineImageUrl.value = "";
+  });
   startLoading();
   TutorialApi.fetchTutorialSearch(searchTarget.value).then((res) => {
     tutorialSearchResultList.value = res.data;
@@ -36,7 +42,16 @@ function toFile(name: string) {
   TutorialApi.fetchTutorialSearch(name).then((res) => {
     endLoading();
     if (res && res.data && Array.isArray(res.data) && res.data.length !== 0) {
-      window.open(`https://arona.cdn.diyigemt.com/image${res.data[0].path}`);
+      const path = `https://arona.cdn.diyigemt.com/image${res.data[0].path}`;
+      if (settingStore.imageInlineMode) {
+        const win = window.open(`https://arona.cdn.diyigemt.com/image${path}`);
+        if (win === null) {
+          ElMessageBox.alert("窗口打开失败, 请允许弹出新窗口或在右上角设置中改变图片打开方式", "提示");
+        }
+      } else {
+        inlineImageUrl.value = path;
+        showInlineImage.value = true;
+      }
     } else {
       errorMessage("获取path失败");
     }
@@ -67,18 +82,25 @@ function toFile(name: string) {
       </ElTabPane>
       <ElTabPane :label="t('chapter map')" name="chapterMap">
         <ElScrollbar height="300">
-          <ElSpace
-            v-for="(e, index) in ChapterMapList" :key="index" wrap :class="(index === 0 && removeSpace) ? ''
+          <div
+            v-for="(e, index) in ChapterMapList" :key="index" :class="index === 0 ? ''
               : 'mt-4'"
           >
-            <ElButton
-              v-for="(item, jIndex) in e"
-              :key="`${index}-${jIndex}`"
-              @click="toFile(item)"
+            <div class="mb-8px">
+              第{{ MaxChapter - index }}章
+            </div>
+            <ElSpace
+              wrap
             >
-              {{ item }}
-            </ElButton>
-          </ElSpace>
+              <ElButton
+                v-for="(item, jIndex) in e"
+                :key="`${index}-${jIndex}`"
+                @click="toFile(item)"
+              >
+                {{ item }}
+              </ElButton>
+            </ElSpace>
+          </div>
         </ElScrollbar>
       </ElTabPane>
     </ElTabs>
@@ -99,16 +121,19 @@ function toFile(name: string) {
         </ElButton>
       </ElFormItem>
     </ElForm>
-    <ElSpace wrap fill class="w-100%">
-      <ElCard
-        v-for="(e, index) in tutorialSearchResultList"
-        :key="index"
-        class="cursor-pointer search-result-item"
-        @click="toFile(e.name)"
-      >
-        {{ e.name }}
-      </ElCard>
-    </ElSpace>
+    <div>
+      <ElImage v-if="showInlineImage" :src="inlineImageUrl" fit="cover" :preview-src-list="[inlineImageUrl]" />
+      <ElSpace v-else wrap fill class="w-100%">
+        <ElCard
+          v-for="(e, index) in tutorialSearchResultList"
+          :key="index"
+          class="cursor-pointer search-result-item"
+          @click="toFile(e.name)"
+        >
+          {{ e.name }}
+        </ElCard>
+      </ElSpace>
+    </div>
   </div>
 </template>
 

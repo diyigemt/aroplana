@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import LocalesChange from "./components/LocalesChange/index.vue";
 import About from "./components/About/index.vue";
-import ClearCache from "./components/ClearCache/index.vue";
+import Setting from "./components/Setting/index.vue";
 import UnoCSSIconButton from "~/components/Icon/UnoCSSIconButton.vue";
 
 defineOptions({
@@ -38,8 +38,8 @@ defineOptions({
       <div>
         <!-- <ThemeChange /> -->
         <About />
-        <ClearCache />
-        <LocalesChange />
+        <Setting />
+        <!-- <LocalesChange /> -->
         <span
           class="tooltip tooltip-bottom before:text-xs before:content-[attr(data-tip)]"
           data-tip="GitHub"

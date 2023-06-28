@@ -3,6 +3,7 @@ import { createApp } from "vue";
 
 // Vue Router
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import { createI18n } from "vue-i18n";
 
 import { registerSW } from "virtual:pwa-register";
@@ -46,7 +47,9 @@ app.use(createI18n({
   locale: unref(useLocalStorage("locale", "zh-CN")),
   messages,
 }));
-app.use(createPinia());
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+app.use(pinia);
 registerStore();
 app.use(router);
 app.mount("#app");

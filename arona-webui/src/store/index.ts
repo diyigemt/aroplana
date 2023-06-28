@@ -1,4 +1,4 @@
-import { counter } from "./counter";
+import { useSetting } from "./setting";
 
 const appStore: any = {};
 
@@ -6,7 +6,7 @@ const appStore: any = {};
  * 注册app状态库
  */
 export const registerStore = () => {
-  appStore.counter = counter();
+  appStore.counter = useSetting();
 };
 
 export default appStore;

@@ -43,6 +43,11 @@ function onReject() {
         AronaBot攻略数据公开计划
       </ElLink>做出来的简易界面，有什么想法自己去看
     </ElText>
+    <ElText>
+      Safari<ElText tag="del">
+        (现代IE)
+      </ElText>用户可以去右上角设置图片打开方式
+    </ElText>
     <template #footer>
       <ElButton @click="onReject">
         不明白
