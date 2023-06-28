@@ -27,6 +27,7 @@ const updateSW = registerSW({
       type: "info",
       confirmButtonText: "刷新",
     }).then(() => {
+      useSetting().readAnnounce(false);
       updateSW(true).then();
     }).catch(() => {
       warningMessage("取消更新");

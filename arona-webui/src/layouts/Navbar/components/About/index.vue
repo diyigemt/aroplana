@@ -6,7 +6,8 @@ import { isMobile } from "~/utils";
 defineOptions({
   name: "About",
 });
-const show = useLocalStorage("show-info", true);
+const settingStore = useSetting();
+const show = ref(settingStore.showAnnounce);
 const width = isMobile() ? "90vw" : "300";
 let unknownCount = 0;
 const unknownCountMap: { [key: number]: string } = {
@@ -19,6 +20,7 @@ function onReject() {
   if (unknownCount === 50) {
     successMessage("恭喜, 你已经点了50下, 你赢了");
     show.value = false;
+    settingStore.readAnnounce();
   } else {
     errorMessage(unknownCountMap[unknownCount] || "不明白也得给我明白");
   }
@@ -52,7 +54,7 @@ function onReject() {
       <ElButton @click="onReject">
         不明白
       </ElButton>
-      <ElButton type="primary" @click="show = false">
+      <ElButton type="primary" @click="show = false; settingStore.readAnnounce();">
         明白
       </ElButton>
     </template>
