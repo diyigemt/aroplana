@@ -34,7 +34,7 @@ const doSearch = useThrottleFn(() => {
   startLoading();
   TutorialApi.fetchTutorialSearch(searchTarget.value).then((res) => {
     endLoading();
-    if (res && res.data && Array.isArray(res.data) && res.data.length !== 0) {
+    if (res && res.data && Array.isArray(res.data) && res.data.length === 0) {
       showImage(res.data[0]);
     } else {
       tutorialSearchResultList.value = res.data;
