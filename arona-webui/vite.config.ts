@@ -110,7 +110,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        ignoreURLParametersMatching: [/^https:\/\/arona.cdn.diyigemt.com\/image\//],
+        ignoreURLParametersMatching: [/^(.*?)arona[.]cdn[.].*$/],
         runtimeCaching: [
           {
             urlPattern: /(.*?)\.(js|css|json)$/i,
@@ -120,7 +120,11 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /^https:\/\/arona.cdn.diyigemt.com\/image\//,
+            urlPattern: ({ url }) => url.origin === "https://arona.cdn.diyigemt.com",
+            handler: "NetworkOnly",
+          },
+          {
+            urlPattern: ({ url }) => url.href.match(/arona.diyigemt.com\/api/),
             handler: "NetworkOnly",
           },
         ],

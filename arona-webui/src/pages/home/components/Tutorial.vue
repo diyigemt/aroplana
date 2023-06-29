@@ -55,7 +55,7 @@ function toFile(name: string) {
 function showImage(data: TutorialSearchResult) {
   const path = `https://arona.cdn.diyigemt.com/image${data.path}`;
   if (settingStore.imageInlineMode) {
-    const win = window.open(`https://arona.cdn.diyigemt.com/image${path}`);
+    const win = window.open(path);
     if (win === null) {
       ElMessageBox.alert("窗口打开失败, 请允许弹出新窗口或在右上角设置中改变图片打开方式", "提示");
     }

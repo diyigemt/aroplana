@@ -36,9 +36,13 @@ function doClearChache() {
     })
     .then(() => {
       ElMessage.info("已重置应用状态，即将刷新页面");
-      setTimeout(() => {
-        router.go(0);
-      }, 1500);
+      if (window.location.href.match(/arona[.]cdn[.]/)) {
+        window.location.href = "https://tutorial.arona.diyigemt.com/home";
+      } else {
+        setTimeout(() => {
+          router.go(0);
+        }, 1500);
+      }
     }).catch();
 }
 </script>

@@ -8,7 +8,7 @@ defineOptions({
 });
 const settingStore = useSetting();
 const show = ref(settingStore.showAnnounce);
-const width = isMobile() ? "90vw" : "300";
+const width = isMobile() ? "90vw" : "400";
 let unknownCount = 0;
 const unknownCountMap: { [key: number]: string } = {
   10: "真的不明白吗",
@@ -45,10 +45,15 @@ function onReject() {
         AronaBot攻略数据公开计划
       </ElLink>做出来的简易界面，有什么想法自己去看
     </ElText>
-    <ElText>
+    <br>
+    <ElText class="mt-4">
       Safari<ElText tag="del">
         (现代IE)
       </ElText>用户可以去右上角设置图片打开方式
+    </ElText>
+    <br>
+    <ElText class="mt-4">
+      如果新窗口打开的图片出现404现象, 请在404的窗口清空缓存并完全关闭浏览器再打开. 或者在设置里选择页内弹窗方式打开
     </ElText>
     <template #footer>
       <ElButton @click="onReject">
