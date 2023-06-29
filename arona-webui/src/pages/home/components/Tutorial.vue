@@ -34,7 +34,7 @@ const doSearch = useThrottleFn(() => {
   startLoading();
   TutorialApi.fetchTutorialSearch(searchTarget.value).then((res) => {
     endLoading();
-    if (res && res.data && Array.isArray(res.data) && res.data.length === 0) {
+    if (res && res.data && Array.isArray(res.data) && res.data.length === 1) {
       showImage(res.data[0]);
     } else {
       tutorialSearchResultList.value = res.data;
@@ -45,7 +45,7 @@ function toFile(name: string) {
   startLoading();
   TutorialApi.fetchTutorialSearch(name).then((res) => {
     endLoading();
-    if (res && res.data && Array.isArray(res.data) && res.data.length !== 0) {
+    if (res && res.data && Array.isArray(res.data) && res.data.length === 1) {
       showImage(res.data[0]);
     } else {
       errorMessage("获取path失败");
