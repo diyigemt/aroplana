@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ElButton, ElDialog } from "element-plus";
-import { errorMessage, successMessage } from "~/utils/message";
+import type { NotificationOptionsTyped, NotificationProps } from "element-plus";
+import { ElButton, ElDialog, ElMessage, ElNotification } from "element-plus";
 import { isMobile } from "~/utils";
 
 defineOptions({
@@ -10,19 +10,49 @@ const settingStore = useSetting();
 const show = ref(settingStore.showAnnounce);
 const width = isMobile() ? "90vw" : "400";
 let unknownCount = 0;
-const unknownCountMap: { [key: number]: string } = {
-  10: "真的不明白吗",
-  15: "好好好",
-  20: "那就不明白吧, 我又没什么办法",
+type Position = NotificationOptionsTyped["position"];
+type NotifyType = NotificationProps["type"];
+interface Action {
+  content: string; action?: (config: Action) => boolean; type?: NotifyType;
+}
+const positionCircleList: Position[] = isMobile() ? ["top-right", "bottom-left"] : ["top-right", "top-left", "bottom-left", "bottom-right"];
+const unknownCountMap: { [key: number]: Action } = {
+  10: { content: "真的不明白吗" },
+  15: { content: "好好好" },
+  20: { content: "<div class='mb-8px'>那就不明白吧</div><div>我又没什么办法</div>" },
+  50: { content: "<div class='mb-8px'>恭喜, 你已经点了50下</div><div>你赢了</div>", action: onEgg50, type: "success" },
+  60: { content: "<div class='mb-8px'>第三个页面的中间....</div><div>有什么东西呢</div>", action: onEgg100, type: "success" },
 };
+let lastPostition = 0;
+function onEgg50(_: Action) {
+  settingStore.setEggStep(1);
+  return true;
+}
+function onEgg100(_: Action) {
+  settingStore.setEggStep(2);
+  return true;
+}
 function onReject() {
   unknownCount++;
-  if (unknownCount === 50) {
-    successMessage("恭喜, 你已经点了50下, 你赢了");
-    show.value = false;
-    settingStore.readAnnounce();
+  const config = unknownCountMap[unknownCount];
+  if (config) {
+    if (config.content) {
+      ElMessage({ message: config.content, type: config.type || "error", duration: 5000, dangerouslyUseHTMLString: true });
+    }
+    if (config.action) {
+      const close = config.action(config);
+      if (close) {
+        show.value = false;
+        settingStore.readAnnounce();
+      }
+    }
   } else {
-    errorMessage(unknownCountMap[unknownCount] || "不明白也得给我明白");
+    ElNotification.error({
+      message: "不明白也得给我明白",
+      position: positionCircleList[lastPostition],
+      duration: 1000,
+    });
+    lastPostition = (lastPostition + 1) % positionCircleList.length;
   }
 }
 </script>

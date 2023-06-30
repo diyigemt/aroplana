@@ -3,7 +3,7 @@ import { ElCard, ElDivider, ElForm, ElFormItem, ElImage, ElInput, ElMessageBox, 
 import { TutorialUtil } from "~/utils/tutorial";
 import { TutorialApi } from "~/api/modules/tutorial";
 import type { TutorialSearchResult } from "~/interface/modules/tutorial";
-import { errorMessage, warningMessage } from "~/utils/message";
+import { errorMessage, successMessage, warningMessage } from "~/utils/message";
 import { useLoading } from "~/utils";
 
 defineOptions({
@@ -64,6 +64,9 @@ function showImage(data: TutorialSearchResult) {
     showInlineImage.value = true;
   }
 }
+function onHiddenEgg() {
+  successMessage("还是太闲了, 总之彩蛋没做完.");
+}
 </script>
 
 <template>
@@ -109,6 +112,13 @@ function showImage(data: TutorialSearchResult) {
             </ElSpace>
           </div>
         </ElScrollbar>
+      </ElTabPane>
+      <ElTabPane v-if="settingStore.eggStep === 2" name="hidden" label="">
+        <div class="relative h-300px">
+          <div class="absolute top-50% left-50% cursor-pointer transform translate-x--50% translate-y--50%" @click="onHiddenEgg()">
+&emsp;&emsp;
+          </div>
+        </div>
       </ElTabPane>
     </ElTabs>
     <ElDivider />

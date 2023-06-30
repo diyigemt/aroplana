@@ -4,6 +4,7 @@ export const useSetting = defineStore("config", {
   state: () => ({
     showAnnounce: true,
     imageInlineMode: true,
+    eggStep: 0,
   }),
   actions: {
     readAnnounce(read = true) {
@@ -12,6 +13,11 @@ export const useSetting = defineStore("config", {
     setImageInlineMode(mode: boolean) {
       this.imageInlineMode = mode;
     },
+    setEggStep(step: number) {
+      this.eggStep = step;
+    },
   },
-  persist: true,
+  persist: {
+    paths: ["showAnnounce", "imageInlineMode"],
+  },
 });
