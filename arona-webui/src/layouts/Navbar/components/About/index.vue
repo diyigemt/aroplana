@@ -85,6 +85,12 @@ function onReject() {
     <ElText class="mt-4">
       如果新窗口打开的图片出现404现象, 请在404的窗口清空缓存并完全关闭浏览器再打开. 或者在设置里选择页内弹窗方式打开
     </ElText>
+    <br>
+    <ElText class="mt-4">
+      如果资源加载失败，可以去<ElLink type="primary" href="https://docs.qq.com/sheet/DVGNTT3hCVUJKVHZP?tab=BB08J2" target="_blank">
+        腾讯文档
+      </ElLink>反馈
+    </ElText>
     <template #footer>
       <ElButton @click="onReject">
         不明白
