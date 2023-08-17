@@ -21,7 +21,7 @@ const unknownCountMap: { [key: number]: Action } = {
   15: { content: "好好好" },
   20: { content: "<div class='mb-8px'>那就不明白吧</div><div>我又没什么办法</div>" },
   50: { content: "<div class='mb-8px'>恭喜, 你已经点了50下</div><div>你赢了</div>", action: onEgg50, type: "success" },
-  60: { content: "<div class='mb-8px'>第三个页面的中间....</div><div>有什么东西呢</div>", action: onEgg100, type: "success" },
+  60: { content: "<div class='mb-8px'>第四个页面的中间....</div><div>有什么东西呢</div>", action: onEgg100, type: "success" },
 };
 let lastPostition = 0;
 function onEgg50(_: Action) {
