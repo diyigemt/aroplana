@@ -19,6 +19,7 @@ import "~/styles/main.css";
 import "uno.css";
 
 import "element-plus/dist/index.css";
+import "element-plus/theme-chalk/dark/css-vars.css";
 import { warningMessage } from "~/utils/message";
 
 const updateSW = registerSW({

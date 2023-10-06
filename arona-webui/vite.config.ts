@@ -120,10 +120,6 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: ({ url }) => url.origin === "https://arona.cdn.diyigemt.com",
-            handler: "NetworkOnly",
-          },
-          {
             urlPattern: ({ url }) => url.href.match(/arona.diyigemt.com\/api/),
             handler: "NetworkOnly",
           },

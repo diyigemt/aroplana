@@ -1,5 +1,11 @@
 @import "variables.css";
 
-html.dark {
-  //background: #22272e;
+html {
+  .dark {
+    background: #22272e;
+    .btn-ghost {
+      color: rgb(207, 211, 220);
+    }
+  }
+  transition: background .3s ease-in-out;
 }

@@ -49,7 +49,7 @@ defineOptions({
               aria-label="Github"
               target="_blank"
               href="https://github.com/diyigemt/arona"
-              class="btn-ghost drawer-button btn-square btn normal-case"
+              class="btn-ghost drawer-button btn-square btn normal-case dark-icon"
             >
               <UnoCSSIconButton icon="i-mdi-github" />
             </a>
