@@ -12,7 +12,18 @@ const width = isMobile() ? "90vw" : "300";
 const { show, showDialog, hideDialog } = useDialog();
 const { imageInlineMode, setImageInlineMode } = useSetting();
 const isDark = useDark();
+const dark = ref(isDark.value);
 const _imageInlineMode = ref(imageInlineMode);
+watch(() => dark.value, (cur) => {
+  if (cur) {
+    document.body.style.backgroundColor = "#22272e";
+  } else {
+    document.body.style.backgroundColor = "white";
+  }
+  setTimeout(() => {
+    isDark.value = cur;
+  }, 160);
+}, { immediate: true });
 function clearCache() {
   ElMessageBox.confirm("在应用工作不正常时使用此功能清除缓存, 是否继续?", "清除缓存", {
     type: "warning",
@@ -60,7 +71,7 @@ function doClearChache() {
   >
     <ElForm size="small">
       <ElFormItem label="暗色模式">
-        <ElSwitch v-model="isDark" active-text="打开" inactive-text="关闭" :active-value="true" :inactive-value="false" />
+        <ElSwitch v-model="dark" active-text="打开" inactive-text="关闭" :active-value="true" :inactive-value="false" />
       </ElFormItem>
       <ElFormItem label="图片打开方式">
         <ElSwitch v-model="_imageInlineMode" active-text="新页面" inactive-text="页内弹窗" :active-value="true" :inactive-value="false" @change="setImageInlineMode" />

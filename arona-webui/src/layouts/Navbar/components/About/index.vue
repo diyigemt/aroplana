@@ -91,6 +91,10 @@ function onReject() {
         腾讯文档
       </ElLink>反馈
     </ElText>
+    <br>
+    <ElText class="mt-4">
+      右上角设置新增夜间模式
+    </ElText>
     <template #footer>
       <ElButton @click="onReject">
         不明白

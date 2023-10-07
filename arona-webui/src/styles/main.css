@@ -1,12 +1,8 @@
 @import "variables.css";
+body {
+  transition: background-color .2s;
+}
 
-html {
-  transition: background .3s ease-in-out;
-}
-html.dark {
-  background: #22272e;
-  
-}
 html.dark .btn-ghost {
   color: rgb(207, 211, 220);
 }
