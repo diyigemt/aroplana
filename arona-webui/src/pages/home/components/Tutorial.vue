@@ -20,6 +20,7 @@ const searchTarget = ref("");
 const settingStore = useSetting();
 const showInlineImage = ref(false);
 const inlineImageUrl = ref("");
+const router = useRoute();
 const { loading, startLoading, endLoading } = useLoading(600);
 const doSearch = useThrottleFn(() => {
   const name = searchTarget.value;
@@ -67,6 +68,12 @@ function showImage(data: TutorialSearchResult) {
 function onHiddenEgg() {
   successMessage("还是太闲了, 总之彩蛋没做完.");
 }
+onMounted(() => {
+  const name = router.query.name;
+  if (name) {
+    toFile(name as string);
+  }
+});
 </script>
 
 <template>
