@@ -54,7 +54,7 @@ function toFile(name: string) {
   }).catch(endLoading);
 }
 function showImage(data: TutorialSearchResult) {
-  const path = `https://arona.cdn.diyigemt.com/image${data.path}?${data.hash}`;
+  const path = `https://arona.cdn.diyigemt.com/image${data.content}?${data.hash}`;
   if (settingStore.imageInlineMode) {
     const win = window.open(path);
     if (win === null) {
