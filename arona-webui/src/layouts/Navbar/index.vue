@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import LocalesChange from "./components/LocalesChange/index.vue";
 import About from "./components/About/index.vue";
 import Setting from "./components/Setting/index.vue";
 import UnoCSSIconButton from "~/components/Icon/UnoCSSIconButton.vue";
