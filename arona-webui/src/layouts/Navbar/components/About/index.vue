@@ -71,7 +71,7 @@ function onReject() {
     :width="width"
   >
     <ElText>
-      本页面是根据<ElLink type="primary" href="https://doc.arona.diyigemt.com/api/" target="_blank">
+      本页面是根据<ElLink type="primary" href="https://doc.arona.diyigemt.com/v1/api/" target="_blank">
         AronaBot攻略数据公开计划
       </ElLink>做出来的简易界面，有什么想法自己去看
     </ElText>
