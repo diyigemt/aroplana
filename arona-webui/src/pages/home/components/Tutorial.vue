@@ -10,7 +10,7 @@ defineOptions({
   name: "AronaTutorial",
 });
 const { t } = useI18n();
-const MaxChapter = 25;
+const MaxChapter = 26;
 const ChapterMapList = Array.from({ length: MaxChapter }).map((_, index) => TutorialUtil.buildChapterMapList(index + 1)).reverse();
 const QuickActionMap = TutorialUtil.QuickActionMap;
 const server = ref("server-jp");
