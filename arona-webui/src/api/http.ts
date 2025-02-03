@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
   (response: IResponse) => {
     if (response.status === HTTP_OK) {
       const resp = response.data as ServerResponse<unknown>;
-      if (resp && resp.code !== HTTP_OK && resp.message && response.config.showServerResponseError) {
+      if (resp && resp.code !== HTTP_OK && resp.code !== 101 && resp.message && response.config.showServerResponseError) {
         warningMessage(resp.message);
       }
 
