@@ -6,6 +6,7 @@ function fetchTutorialSearch(name: string) {
     url: "/image",
     params: {
       name,
+      method: 3,
     },
   });
 }
